@@ -1,0 +1,4 @@
+fire
+transformers
+flair
+tqdm
