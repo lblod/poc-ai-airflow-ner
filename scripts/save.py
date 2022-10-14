@@ -41,20 +41,34 @@ def save(endpoint):
 
             q = f"""
             PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
-    
-            DELETE {{
-                GRAPH <http://mu.semte.ch/application> {{
-                    <{file_name}> ext:hasNer ?oldNER
-                }}
-            }}
-            WHERE {{
-                GRAPH <http://mu.semte.ch/application> {{
-                    <{file_name}> ext:hasNer ?oldNER
-                }}
-            }}
             
             
+            DELETE{{
+             GRAPH <http://mu.semte.ch/application>{{
+             <{file_name}> ext:hasNer ?b ; ext:ingestedml2GrowSmartRegulationsNer ?srn .
+            ?b ext:entity ?ner_type; ext:end ?end; ext:start ?start; ext:word ?word .
+            }}
+            }}
+            WHERE{{
+             <{file_name}> ext:hasNer ?b ; ext:ingestedml2GrowSmartRegulationsNer ?srn .
+            ?b ext:entity ?ner_type; ext:end ?end; ext:start ?start; ext:word ?word .
+            
+            }}
             """
+            #
+            # DELETE {{
+            #     GRAPH <http://mu.semte.ch/application> {{
+            #         <{file_name}> ext:hasNer ?oldNER
+            #     }}
+            # }}
+            # WHERE {{
+            #     GRAPH <http://mu.semte.ch/application> {{
+            #         <{file_name}> ext:hasNer ?oldNER
+            #     }}
+            # }}
+            
+            
+
             # WHERE
             # {{
             #      GRAPH < http: // mu.semte.ch / application > {{
