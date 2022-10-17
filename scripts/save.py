@@ -13,6 +13,11 @@ def save(endpoint):
     :return:
     """
     records = read_json(file_name="ner.json")
+
+    # If no records are available skip
+    if not records:
+        return None
+
     headers = {
         "Accept": "application/sparql-results+json,*/*;q=0.9"
     }
