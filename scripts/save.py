@@ -6,6 +6,12 @@ TYPE_MAPPING = {"LOC": "Location", "PER": "Person", "ORG": "Organization"}
 
 
 def save(endpoint):
+    """
+    Function that creates and executes the DELETE WHERE and INSERT queries
+
+    :param endpoint: the url to the sparql endpoint
+    :return:
+    """
     records = read_json(file_name="ner.json")
     headers = {
         "Accept": "application/sparql-results+json,*/*;q=0.9"
@@ -94,6 +100,7 @@ def save(endpoint):
             r = requests.post(endpoint, data={"query": q}, headers=headers)
             if r.status_code != 200:
                 print(f"[FAILURE] {50 * '-'} /n {q} /n {50 * '-'}")
+
         except Exception as ex:
             print(ex)
             raise ex
